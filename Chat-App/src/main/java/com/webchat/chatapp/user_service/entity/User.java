@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class User {
     @Id
-    private String nickName;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private Status status;
 }

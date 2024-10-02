@@ -10,15 +10,15 @@ const chatArea = document.querySelector('#chat-messages');
 const logout = document.querySelector('#logout');
 
 let stompClient = null;
-let nickname = null;
-let fullname = null;
+let firstname = null;
+let lastname = null;
 let selectedUserId = null;
 
 function connect(event) {
-    nickname = document.querySelector('#nickname').value.trim();
-    fullname = document.querySelector('#fullname').value.trim();
+    firstname = document.querySelector('#firstname').value.trim();
+    lastname = document.querySelector('#lastname').value.trim();
 
-    if (nickname && fullname) {
+    if (firstname && lastname) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -32,22 +32,21 @@ function connect(event) {
 
 
 function onConnected() {
-    stompClient.subscribe(`/user/${nickname}/queue/messages`, onMessageReceived);
+    stompClient.subscribe(`/user/${firstname}/queue/messages`, onMessageReceived);
     stompClient.subscribe(`/user/public`, onMessageReceived);
 
     // register the connected user
-    stompClient.send("/app/user.addUser",
-        {},
-        JSON.stringify({nickName: nickname, fullName: fullname, status: 'ONLINE'})
-    );
-    document.querySelector('#connected-user-fullname').textContent = fullname;
+    stompClient.send("/app/user.addUser", {}, JSON.stringify({firstName: firstname, lastName: lastname, status: 'ONLINE'}));
+    document.querySelector('#connected-user-fullname').textContent = firstname+" "+lastname;
     findAndDisplayConnectedUsers().then();
 }
 
 async function findAndDisplayConnectedUsers() {
     const connectedUsersResponse = await fetch('/users');
+    console.log(connectedUsersResponse);
     let connectedUsers = await connectedUsersResponse.json();
-    connectedUsers = connectedUsers.filter(user => user.nickName !== nickname);
+    console.log("================================");
+    connectedUsers = connectedUsers.filter(user => user.firstName !== firstname);
     const connectedUsersList = document.getElementById('connectedUsers');
     connectedUsersList.innerHTML = '';
 
@@ -64,14 +63,15 @@ async function findAndDisplayConnectedUsers() {
 function appendUserElement(user, connectedUsersList) {
     const listItem = document.createElement('li');
     listItem.classList.add('user-item');
-    listItem.id = user.nickName;
+    listItem.id = user.firstName;
+    console.log(firstname+"--"+user.lastName)
 
     const userImage = document.createElement('img');
     userImage.src = '../img/user_icon.png';
-    userImage.alt = user.fullName;
+    userImage.alt = user.firstName;
 
     const usernameSpan = document.createElement('span');
-    usernameSpan.textContent = user.fullName;
+    usernameSpan.textContent = user.firstName;
 
     const receivedMsgs = document.createElement('span');
     receivedMsgs.textContent = '0';
@@ -107,7 +107,7 @@ function userItemClick(event) {
 function displayMessage(senderId, content) {
     const messageContainer = document.createElement('div');
     messageContainer.classList.add('message');
-    if (senderId === nickname) {
+    if (senderId === firstname) {
         messageContainer.classList.add('sender');
     } else {
         messageContainer.classList.add('receiver');
@@ -119,7 +119,7 @@ function displayMessage(senderId, content) {
 }
 
 async function fetchAndDisplayUserChat() {
-    const userChatResponse = await fetch(`/messages/${nickname}/${selectedUserId}`);
+    const userChatResponse = await fetch(`/messages/${firstname}/${selectedUserId}`);
     const userChat = await userChatResponse.json();
     chatArea.innerHTML = '';
     userChat.forEach(chat => {
@@ -139,13 +139,13 @@ function sendMessage(event) {
     const messageContent = messageInput.value.trim();
     if (messageContent && stompClient) {
         const chatMessage = {
-            senderId: nickname,
+            senderId: firstname,
             recipientId: selectedUserId,
             content: messageInput.value.trim(),
             timestamp: new Date()
         };
         stompClient.send("/app/chat", {}, JSON.stringify(chatMessage));
-        displayMessage(nickname, messageInput.value.trim());
+        displayMessage(firstname, messageInput.value.trim());
         messageInput.value = '';
     }
     chatArea.scrollTop = chatArea.scrollHeight;
@@ -177,10 +177,7 @@ async function onMessageReceived(payload) {
 }
 
 function onLogout() {
-    stompClient.send("/app/user.disconnectUser",
-        {},
-        JSON.stringify({nickName: nickname, fullName: fullname, status: 'OFFLINE'})
-    );
+    stompClient.send("/app/user.disconnectUser", {}, JSON.stringify({firstName: firstname, lastName: lastname, status: 'OFFLINE'}));
     window.location.reload();
 }
 
