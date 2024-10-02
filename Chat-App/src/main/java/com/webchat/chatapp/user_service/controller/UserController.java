@@ -20,9 +20,7 @@ public class UserController {
 
     @MessageMapping("/user.addUser")
     @SendTo("/user/public")
-    public User addUser(
-            @Payload User user
-    ) {
+    public User addUser(@Payload User user) {
         userService.saveUser(user);
         return user;
     }
