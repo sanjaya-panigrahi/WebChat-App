@@ -1,0 +1,40 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: USER-APP
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/webchat-app-db
+    username: root
+    password: secret
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+eureka:
+  client:
+    service_url:
+      default_zone: http://localhost:8761/eureka/
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure.include: beans, env, health, info, metrics, mappings
+#  endpoint:
+#    health:
+#      show-details: always
+#
+#springdoc:
+#  show-actuator: true
+#  swagger-ui:
+#    groups-order: DESC
+#    disable-swagger-default-url: true
