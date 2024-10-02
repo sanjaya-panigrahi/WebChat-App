@@ -12,12 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class UserRegistration {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class User {
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private String userName;
     private String password;
+    @Id
     private String firstName;
     private String lastName;
+    private Status status;
 }

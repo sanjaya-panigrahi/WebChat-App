@@ -4,16 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.webchat.userapp.dto.UserRequest;
-import com.webchat.userapp.entity.UserRegistration;
+import com.webchat.userapp.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
 public class GenericUtility {
 
-    public static UserRegistration mapDTOToEntity(UserRequest userRequest) {
+    public static User mapDTOToEntity(UserRequest userRequest) {
         log.info("Requested User {}", userRequest);
-        UserRegistration user = new UserRegistration();
+        User user = new User();
 
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());
@@ -23,7 +23,7 @@ public class GenericUtility {
         return user;
     }
 
-    public static UserRequest mapEntityToDTO(UserRegistration user) {
+    public static UserRequest mapEntityToDTO(User user) {
         UserRequest userRequest = new UserRequest();
 
         userRequest.setFirstName(user.getFirstName());
