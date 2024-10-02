@@ -15,8 +15,16 @@ public class UserService {
     private final UserRepository repository;
 
     public void saveUser(User user) {
-        user.setStatus(Status.ONLINE);
-        repository.save(user);
+        var existingUser = repository.findById(user.getFirstName()).orElse(null);
+        if (existingUser != null) {
+            user.setStatus(Status.ONLINE);
+            user.setPassword(existingUser.getPassword());
+            user.setUserName(existingUser.getUserName());
+            repository.save(user);
+        }else{
+            throw new RuntimeException("Please register your self");
+        }
+
     }
 
     public void disconnect(User user) {

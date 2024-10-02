@@ -2,7 +2,8 @@ package com.webchat.userapp.service;
 
 
 import com.webchat.userapp.dto.UserRequest;
-import com.webchat.userapp.entity.UserRegistration;
+import com.webchat.userapp.entity.Status;
+import com.webchat.userapp.entity.User;
 import com.webchat.userapp.repository.UserRepository;
 import com.webchat.userapp.util.GenericUtility;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +17,10 @@ public class UserService {
     private UserRepository userRepository;
 
     public String saveUser(UserRequest userRequest) {
-        UserRegistration user = GenericUtility.mapDTOToEntity(userRequest);
-        UserRegistration userSaved = userRepository.save(user);
+        User user = GenericUtility.mapDTOToEntity(userRequest);
+        user.setStatus(Status.OFFLINE);
+        User userSaved = userRepository.save(user);
         log.info("The User Saved Successfully {}", userSaved);
         return userSaved.getUserName();
     }
-
 }
