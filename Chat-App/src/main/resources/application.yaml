@@ -37,3 +37,4 @@ springdoc:
   swagger-ui:
     groups-order: DESC
     disable-swagger-default-url: true
+
