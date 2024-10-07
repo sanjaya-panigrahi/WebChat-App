@@ -1,0 +1,36 @@
+
+{
+  "namespace": "com.webchat.chatapp.chat_service.dto",
+  "type": "record",
+  "name": "ChatMessageDTO",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "chatId",
+      "type": "string"
+    },
+    {
+      "name": "senderId",
+      "type": "string"
+    },
+    {
+      "name": "recipientId",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "content",
+      "type": "string"
+    }
+//    {
+//      "name": "timestamp",
+//      "type": {
+//        "type": "long",
+//        "logicalType": "timestamp-millis"
+//      }
+//    }
+  ]
+}
