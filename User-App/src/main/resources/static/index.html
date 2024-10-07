@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Chat Application</title>
+</head>
+<body>
+
+<h2>Chat Application</h2>
+
+<div class="user-registration-form-container" id="user-registration-page">
+    <div class="user-registration-form">
+        <h3>Please Register</h3>
+        <form id="userRegistrationForm">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
+
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="text" id="password" name="password" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div class="user-registration-form-login">
+        <form id="userLoginForm">
+            <h3>Already Registered, Please login</h3>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
