@@ -179,6 +179,7 @@ async function onMessageReceived(payload) {
 function onLogout() {
     stompClient.send("/app/user.disconnectUser", {}, JSON.stringify({firstName: firstname, lastName: lastname, status: 'OFFLINE'}));
     window.location.reload();
+    window.location.replace("http://localhost:9090")
 }
 
 usernameForm.addEventListener('submit', connect, true); // step 1
