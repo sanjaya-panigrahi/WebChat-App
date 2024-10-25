@@ -1,11 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>Chat Application</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <title>Chat Application</title>
+    <link href="/main.css" rel="stylesheet" />
+
 </head>
 <body>
 
@@ -15,15 +16,18 @@
     <div class="user-form" id="username-page">
         <h2>Enter Chatroom</h2>
         <form id="usernameForm">
-            <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" required>
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required>
 
-            <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
             <button type="submit">Enter Chatroom</button>
         </form>
     </div>
+<!--    <div class="user-form" id="login-msg-page">-->
+<!--        <h2>Login Failed</h2>-->
+<!--    </div>-->
 </div>
 
 <div class="user-chat-container">
@@ -54,8 +58,8 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="/sockjs.min.js" type="application/javascript"></script>
+<script src="/stomp.min.js" type="application/javascript"></script>
+<script src="/main.js" type="application/javascript"></script>
 </body>
 </html>
