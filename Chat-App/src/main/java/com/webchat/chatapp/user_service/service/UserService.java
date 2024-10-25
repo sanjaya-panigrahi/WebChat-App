@@ -15,7 +15,7 @@ public class UserService {
     private final UserRepository repository;
 
     public void saveUser(User user) {
-        var existingUser = repository.findById(user.getUserName()).orElse(null);
+        var existingUser = repository.findByUserName(user.getUserName());
         if (existingUser != null) {
             user.setStatus(Status.ONLINE);
             user.setPassword(existingUser.getPassword());
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public void disconnect(User user) {
-        var storedUser = repository.findById(user.getFirstName()).orElse(null);
+        var storedUser = repository.findByUserName(user.getFirstName());
         if (storedUser != null) {
             storedUser.setStatus(Status.OFFLINE);
             repository.save(storedUser);

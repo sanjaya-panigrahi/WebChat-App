@@ -8,7 +8,7 @@ const messageInput = document.querySelector('#message');
 const connectingElement = document.querySelector('.connecting');
 const chatArea = document.querySelector('#chat-messages');
 const logout = document.querySelector('#logout');
-const loginMsgpage =document.querySelector('#login-msg-page');
+//const loginMsgpage =document.querySelector('#login-msg-page');
 
 let stompClient = null;
 let username = null;
@@ -24,7 +24,7 @@ function connect(event) {
     if (username && password) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
-        loginMsgpage.classList.add('hidden');
+        //loginMsgpage.classList.add('hidden');
 
         const socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
