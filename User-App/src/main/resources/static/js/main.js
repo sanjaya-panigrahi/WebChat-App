@@ -27,7 +27,9 @@ function registration(event) {
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
-    }).then(r =>console.log(r));
+    }).then(()=> {
+        alert(username + " - User registration Successful, please click on Login")
+    });
 
     event.preventDefault();
 }

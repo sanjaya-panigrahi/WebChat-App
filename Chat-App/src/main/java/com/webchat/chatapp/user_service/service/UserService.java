@@ -15,10 +15,12 @@ public class UserService {
     private final UserRepository repository;
 
     public void saveUser(User user) {
-        var existingUser = repository.findById(user.getFirstName()).orElse(null);
+        var existingUser = repository.findByUserName(user.getUserName());
         if (existingUser != null) {
             user.setStatus(Status.ONLINE);
             user.setPassword(existingUser.getPassword());
+            user.setLastName(existingUser.getLastName());
+            user.setFirstName(existingUser.getFirstName());
             user.setUserName(existingUser.getUserName());
             repository.save(user);
         }else{
@@ -27,8 +29,13 @@ public class UserService {
 
     }
 
+    public String getUser(String username) {
+        User user = repository.findByUserName(username);
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
     public void disconnect(User user) {
-        var storedUser = repository.findById(user.getFirstName()).orElse(null);
+        var storedUser = repository.findByUserName(user.getFirstName());
         if (storedUser != null) {
             storedUser.setStatus(Status.OFFLINE);
             repository.save(storedUser);
