@@ -10,9 +10,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/webchat-app-db
+    url: jdbc:mysql://database-1.crw4wawekfww.us-east-1.rds.amazonaws.com:3306/webchat-app-db
     username: root
-    password: secret
+    password: secretsecret
   jpa:
     show-sql: true
     properties:
