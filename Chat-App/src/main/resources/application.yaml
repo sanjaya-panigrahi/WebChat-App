@@ -44,10 +44,10 @@ spring:
         specific:
           avro:
             reader: "true"
-eureka:
-  client:
-    service_url:
-      default_zone: http://localhost:8761/eureka/
+#eureka:
+#  client:
+#    service_url:
+#      default_zone: http://localhost:8761/eureka/
 
 management:
   endpoints:

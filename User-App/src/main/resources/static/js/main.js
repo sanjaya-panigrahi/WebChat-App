@@ -36,7 +36,7 @@ function registration(event) {
 
 function login(event) {
     console.log("to login page")
-    location.replace('http://localhost:8080');
+    location.replace('http://chat-demo-env.eba-mp4pamc3.us-east-1.elasticbeanstalk.com/');
     event.preventDefault();
 }
 
