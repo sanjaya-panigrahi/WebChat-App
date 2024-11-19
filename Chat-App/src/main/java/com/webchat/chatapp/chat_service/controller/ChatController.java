@@ -25,25 +25,26 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ChatController {
     private final ChatMessageProducer chatMessageProducer;
-    private final SimpMessagingTemplate messagingTemplate;
+
     private final ChatMessageService chatMessageService;
 
     @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
         log.info("Chat Message to Persist and Topic {}", chatMessage);
-        // Save the message to DB
-        chatMessageService.save(chatMessage);
 
         ChatMessageDTO chatMessageDTO = new ChatMessageDTO(
                 chatMessage.getId(),
                 chatMessage.getChatId(),
                 chatMessage.getSenderId(),
                 chatMessage.getRecipientId(),
-                chatMessage.getContent()
+                chatMessage.getContent(),
+                chatMessage.getTimestamp()
         );
 
         // Produce the message to Kafka
         chatMessageProducer.sendChatEventsToTopic(chatMessageDTO);
+        // Save the message to DB
+        chatMessageService.save(chatMessage);
 
 
     }

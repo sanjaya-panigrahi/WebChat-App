@@ -19,9 +19,10 @@ public class ChatMessageConsumer {
 
     @KafkaListener(topics="topic-web-chat-app", groupId = "topic-web-chat-app-grp")
     public void consumeChatEventsFromTopicANDNotify(ConsumerRecord<String, ChatMessageDTO> consumerRecord) {
+
         String key = consumerRecord.key();
         ChatMessageDTO chatMessageDTO = consumerRecord.value();
-        log.info("Avro message received for key : {} value : {}", key, chatMessageDTO.toString());
+        log.info("Chat Message message received for key : {} value : {}", key, chatMessageDTO.toString());
 
         messagingTemplate.convertAndSendToUser(
             chatMessageDTO.getRecipientId().toString(), "/queue/messages",

@@ -27,23 +27,14 @@ spring:
     bootstrap-servers: "localhost:9092"
     producer:
       keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
-      valueSerializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
-      properties:
-        schema:
-          registry:
-            url: "http://127.0.0.1:8081"
+      valueSerializer: "com.webchat.chatapp.chat_service.producer.ChatMessageSerializer"
+
     consumer:
       group-id: "topic-web-chat-app-grp"
       keyDeserializer: "org.apache.kafka.common.serialization.StringDeserializer"
-      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      valueDeserializer: "com.webchat.chatapp.chat_service.consumer.ChatMessageDeserializer"
       autoOffsetReset: "earliest"
-      properties:
-        schema:
-          registry:
-            url: "http://127.0.0.1:8081"
-        specific:
-          avro:
-            reader: "true"
+
 eureka:
   client:
     service_url:

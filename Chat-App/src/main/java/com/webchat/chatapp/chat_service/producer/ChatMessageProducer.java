@@ -1,6 +1,7 @@
 package com.webchat.chatapp.chat_service.producer;
 
 import com.webchat.chatapp.chat_service.dto.ChatMessageDTO;
+import com.webchat.chatapp.chat_service.service.ChatMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;
